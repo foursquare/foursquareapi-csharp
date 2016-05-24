@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCF97F95-98DD-4EF8-8DEA-EF819694713C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoursquareApi</RootNamespace>
+    <AssemblyName>FoursquareApi</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Api\ApiUtils.cs" />
+    <Compile Include="Api\AutoCompleteConverter.cs" />
+    <Compile Include="Api\BaseResponseConverter.cs" />
+    <Compile Include="Api\FoursquareApi.cs" />
+    <Compile Include="Api\FoursquareFiveResponseConverter.cs" />
+    <Compile Include="Api\FoursquareFourResponseConverter.cs" />
+    <Compile Include="Api\FoursquareRequest.cs" />
+    <Compile Include="Api\FoursquareResponseConverter.cs" />
+    <Compile Include="Api\FoursquareThreeResponseConverter.cs" />
+    <Compile Include="Api\FoursquareTwoResponseConverter.cs" />
+    <Compile Include="Api\NotificationConverter.cs" />
+    <Compile Include="Api\SnippetConverter.cs" />
+    <Compile Include="Api\TargetConverter.cs" />
+    <Compile Include="Api\UnifiedSuggestionConverter.cs" />
+    <Compile Include="Helper\Constants.cs" />
+    <Compile Include="Helper\DateTimeUtils.cs" />
+    <Compile Include="Helper\Sort.cs" />
+    <Compile Include="Model\AbstractLikeableBase.cs" />
+    <Compile Include="Model\AccessToken.cs" />
+    <Compile Include="Model\ActivitiesRecentResponse.cs" />
+    <Compile Include="Model\ActivityCard.cs" />
+    <Compile Include="Model\ActivityStream.cs" />
+    <Compile Include="Model\AddTip.cs" />
+    <Compile Include="Model\AddTipInsight.cs" />
+    <Compile Include="Model\AddVenue.cs" />
+    <Compile Include="Model\AppPost.cs" />
+    <Compile Include="Model\AutoComplete.cs" />
+    <Compile Include="Model\Badge.cs" />
+    <Compile Include="Model\BadgeResponse.cs" />
+    <Compile Include="Model\BrowseExplore.cs" />
+    <Compile Include="Model\BrowseExploreAutoCompleteSuggestion.cs" />
+    <Compile Include="Model\BrowseExploreContext.cs" />
+    <Compile Include="Model\BrowseExploreFilters.cs" />
+    <Compile Include="Model\BrowseExploreFilterSection.cs" />
+    <Compile Include="Model\BrowseExploreIntent.cs" />
+    <Compile Include="Model\BrowseExploreItem.cs" />
+    <Compile Include="Model\BrowseExploreMatchedTastes.cs" />
+    <Compile Include="Model\BrowseExploreRefinement.cs" />
+    <Compile Include="Model\BrowseExploreResult.cs" />
+    <Compile Include="Model\BrowseExploreSection.cs" />
+    <Compile Include="Model\BrowseFilters.cs" />
+    <Compile Include="Model\BrowseSuggestions.cs" />
+    <Compile Include="Model\BrowseSuggestionsLocations.cs" />
+    <Compile Include="Model\Bucket.cs" />
+    <Compile Include="Model\Bulletin.cs" />
+    <Compile Include="Model\CallbackUri.cs" />
+    <Compile Include="Model\Campaign.cs" />
+    <Compile Include="Model\CardSpringEdu.cs" />
+    <Compile Include="Model\CardSpringOffer.cs" />
+    <Compile Include="Model\Categories.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Checkin.cs" />
+    <Compile Include="Model\CheckinAchievements.cs" />
+    <Compile Include="Model\CheckinDetailResponse.cs" />
+    <Compile Include="Model\CheckinWithNotifications.cs" />
+    <Compile Include="Model\Comment.cs" />
+    <Compile Include="Model\CommentWithVenues.cs" />
+    <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\CreditCard.cs" />
+    <Compile Include="Model\DialpadResponse.cs" />
+    <Compile Include="Model\DisplayGeo.cs" />
+    <Compile Include="Model\DisplayRange.cs" />
+    <Compile Include="Model\Empty.cs" />
+    <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\Event.cs" />
+    <Compile Include="Model\Expertise.cs" />
+    <Compile Include="Model\ExpertiseChange.cs" />
+    <Compile Include="Model\ExpertiseDelta.cs" />
+    <Compile Include="Model\ExpertiseSection.cs" />
+    <Compile Include="Model\ExpertiseSections.cs" />
+    <Compile Include="Model\ExploreQuickSearch.cs" />
+    <Compile Include="Model\FacebookFriend.cs" />
+    <Compile Include="Model\FacebookFriends.cs" />
+    <Compile Include="Model\FacebookSelf.cs" />
+    <Compile Include="Model\FacePile.cs" />
+    <Compile Include="Model\FiveResponses.cs" />
+    <Compile Include="Model\FollowersResult.cs" />
+    <Compile Include="Model\FollowingResult.cs" />
+    <Compile Include="Model\FollowSuggestions.cs" />
+    <Compile Include="Model\FollowUser.cs" />
+    <Compile Include="Model\FourResponses.cs" />
+    <Compile Include="Model\FoursquareGeocode.cs" />
+    <Compile Include="Model\FoursquareGroups.cs" />
+    <Compile Include="Model\FoursquareList.cs" />
+    <Compile Include="Model\FoursquareLocation.cs" />
+    <Compile Include="Model\FoursquareResponse.cs" />
+    <Compile Include="Model\FriendLeaderboard.cs" />
+    <Compile Include="Model\FriendRequests.cs" />
+    <Compile Include="Model\Friends.cs" />
+    <Compile Include="Model\FriendSuggestions.cs" />
+    <Compile Include="Model\GeoCircle.cs" />
+    <Compile Include="Model\GeocoderLocation.cs" />
+    <Compile Include="Model\GeoFence.cs" />
+    <Compile Include="Model\GeoSuggestion.cs" />
+    <Compile Include="Model\GeoSuggestions.cs" />
+    <Compile Include="Model\Highlights.cs" />
+    <Compile Include="Model\HighlightsSection.cs" />
+    <Compile Include="Model\HistoryCompletion.cs" />
+    <Compile Include="Model\HistorySearch.cs" />
+    <Compile Include="Model\IFoursquareBase.cs" />
+    <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\ImageAd.cs" />
+    <Compile Include="Model\Insight.cs" />
+    <Compile Include="Model\InsightNotification.cs" />
+    <Compile Include="Model\InstagramAccessToken.cs" />
+    <Compile Include="Model\ISaveable.cs" />
+    <Compile Include="Model\Justification.cs" />
+    <Compile Include="Model\LatLng.cs" />
+    <Compile Include="Model\Likes.cs" />
+    <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\Mayorship.cs" />
+    <Compile Include="Model\MayorshipResponse.cs" />
+    <Compile Include="Model\MeBlock.cs" />
+    <Compile Include="Model\Meta.cs" />
+    <Compile Include="Model\Navigation.cs" />
+    <Compile Include="Model\NextPing.cs" />
+    <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\Notifications.cs" />
+    <Compile Include="Model\NotificationSettingsResponse.cs" />
+    <Compile Include="Model\NotificationSettingsSection.cs" />
+    <Compile Include="Model\NotificationSummary.cs" />
+    <Compile Include="Model\NotificationTrayItem.cs" />
+    <Compile Include="Model\OffNetworkUser.cs" />
+    <Compile Include="Model\OpenAtFilter.cs" />
+    <Compile Include="Model\Opinion.cs" />
+    <Compile Include="Model\OpinionatorSummary.cs" />
+    <Compile Include="Model\Opinions.cs" />
+    <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\Page.cs" />
+    <Compile Include="Model\PageInfo.cs" />
+    <Compile Include="Model\PassiveLocation.cs" />
+    <Compile Include="Model\PCheckin.cs" />
+    <Compile Include="Model\PendingCheckin.cs" />
+    <Compile Include="Model\PhoneSetResponse.cs" />
+    <Compile Include="Model\PhoneSignupVerificationResponse.cs" />
+    <Compile Include="Model\Photo.cs" />
+    <Compile Include="Model\Pings.cs" />
+    <Compile Include="Model\Plan.cs" />
+    <Compile Include="Model\PlanCompose.cs" />
+    <Compile Include="Model\PlanDetailsResponse.cs" />
+    <Compile Include="Model\PlanInvite.cs" />
+    <Compile Include="Model\PlansRecent.cs" />
+    <Compile Include="Model\Promoted.cs" />
+    <Compile Include="Model\PromotedTip.cs" />
+    <Compile Include="Model\Prompt.cs" />
+    <Compile Include="Model\PushMessage.cs" />
+    <Compile Include="Model\RateAppNotification.cs" />
+    <Compile Include="Model\RecentVenue.cs" />
+    <Compile Include="Model\RecentVenues.cs" />
+    <Compile Include="Model\Redemption.cs" />
+    <Compile Include="Model\RegisterDeviceResponse.cs" />
+    <Compile Include="Model\Score.cs" />
+    <Compile Include="Model\Scoreboard.cs" />
+    <Compile Include="Model\ScoreboardResponse.cs" />
+    <Compile Include="Model\Setting.cs" />
+    <Compile Include="Model\Settings.cs" />
+    <Compile Include="Model\Share.cs" />
+    <Compile Include="Model\ShareMessage.cs" />
+    <Compile Include="Model\Signup.cs" />
+    <Compile Include="Model\SignupUpsell.cs" />
+    <Compile Include="Model\SnippetDetail.cs" />
+    <Compile Include="Model\SnippetHours.cs" />
+    <Compile Include="Model\SnippetMenu.cs" />
+    <Compile Include="Model\Source.cs" />
+    <Compile Include="Model\Special.cs" />
+    <Compile Include="Model\SpellCorrection.cs" />
+    <Compile Include="Model\SpellSuggestion.cs" />
+    <Compile Include="Model\Sticker.cs" />
+    <Compile Include="Model\StickerLeaderboard.cs" />
+    <Compile Include="Model\StickersResponse.cs" />
+    <Compile Include="Model\StopDetect.cs" />
+    <Compile Include="Model\SuggestedModifications.cs" />
+    <Compile Include="Model\Suggestion.cs" />
+    <Compile Include="Model\Target.cs" />
+    <Compile Include="Model\Taste.cs" />
+    <Compile Include="Model\TastesAutocomplete.cs" />
+    <Compile Include="Model\TastesSuggestions.cs" />
+    <Compile Include="Model\TasteWrapper.cs" />
+    <Compile Include="Model\TextEntities.cs" />
+    <Compile Include="Model\TextEntitiesAndIcon.cs" />
+    <Compile Include="Model\ThreeResponses.cs" />
+    <Compile Include="Model\Thumbnail.cs" />
+    <Compile Include="Model\Tip.cs" />
+    <Compile Include="Model\TipBucket.cs" />
+    <Compile Include="Model\TipList.cs" />
+    <Compile Include="Model\TipStream.cs" />
+    <Compile Include="Model\TopPick.cs" />
+    <Compile Include="Model\TopPicksResponse.cs" />
+    <Compile Include="Model\Trigger.cs" />
+    <Compile Include="Model\TwoResponses.cs" />
+    <Compile Include="Model\UnifiedSuggestion.cs" />
+    <Compile Include="Model\UpdateLocationResponse.cs" />
+    <Compile Include="Model\UpdateLocationWrapper.cs" />
+    <Compile Include="Model\Url.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UsersSearch.cs" />
+    <Compile Include="Model\UserVisits.cs" />
+    <Compile Include="Model\Venue.cs" />
+    <Compile Include="Model\VenueAttribute.cs" />
+    <Compile Include="Model\VenueAttributeSection.cs" />
+    <Compile Include="Model\VenueHours.cs" />
+    <Compile Include="Model\VenueHoursTimeframe.cs" />
+    <Compile Include="Model\VenueSearch.cs" />
+    <Compile Include="Model\VenueStickers.cs" />
+    <Compile Include="Model\VenueTasteJustification.cs" />
+    <Compile Include="Model\VenueTipsResponse.cs" />
+    <Compile Include="Model\VenueUpdate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
