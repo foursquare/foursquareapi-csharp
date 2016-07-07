@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class RecentVenue : IFoursquareBase
+    public class RecentVenue : IFoursquareType
     {
         public Venue venue { get; set; }
         public Checkin checkin { get; set; }

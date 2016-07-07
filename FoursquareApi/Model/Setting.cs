@@ -9,7 +9,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class Setting : IFoursquareBase
+    public sealed class Setting : IFoursquareType
     {
         public string id { get; set; }
         public string name { get; set; }

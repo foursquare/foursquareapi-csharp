@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class HistorySearch : IFoursquareBase
+    public class HistorySearch : IFoursquareType
     {
         public long earliestTimestamp { get; set; }
         public FoursquareList<Checkin> checkins { get; set; }

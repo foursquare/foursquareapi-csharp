@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foursquare.Model
 {
-    public class Taste : IFoursquareBase
+    public class Taste : IFoursquareType
     {
         public string id { get; set; }
         public string text { get; set; }

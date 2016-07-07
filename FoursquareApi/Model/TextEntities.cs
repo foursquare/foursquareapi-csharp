@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class TextEntities : IFoursquareBase
+    public class TextEntities : IFoursquareType
     {
         public string text { get; set; }
         public List<Entity> entities { get; set; }

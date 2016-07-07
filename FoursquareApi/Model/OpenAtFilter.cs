@@ -9,7 +9,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class OpenAtFilter : IFoursquareBase
+    public sealed class OpenAtFilter : IFoursquareType
     {
         public bool openNow { get; set; }
         public int localDay { get; set; }

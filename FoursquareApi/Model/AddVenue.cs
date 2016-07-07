@@ -8,7 +8,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class AddVenue : IFoursquareBase
+    public sealed class AddVenue : IFoursquareType
     {
         public string ignoreDuplicatesKey { get; set; }
         public List<Venue> candidateDuplicateVenues { get; set; }

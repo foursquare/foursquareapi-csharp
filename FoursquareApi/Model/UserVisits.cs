@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class UserVisits : IFoursquareBase
+    public class UserVisits : IFoursquareType
     {
         public User user { get; set; }
         public int visits { get; set; }

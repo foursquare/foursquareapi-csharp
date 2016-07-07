@@ -9,7 +9,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class GeocoderLocation : IFoursquareBase
+    public sealed class GeocoderLocation : IFoursquareType
     {
         public string where { get; set; }
         public string what { get; set; }
@@ -28,7 +28,7 @@ namespace Foursquare.Model
             }
         }
 
-        public sealed class Feature : IFoursquareBase
+        public sealed class Feature : IFoursquareType
         {
             public string cc { get; set; }
             public string name { get; set; }
@@ -43,13 +43,13 @@ namespace Foursquare.Model
             public Geometry geometry { get; set; }
         }
 
-        public sealed class Geometry : IFoursquareBase
+        public sealed class Geometry : IFoursquareType
         {
             public LatLng center { get; set; }
             public Bounds bounds { get; set; }
         }
 
-        public sealed class Bounds : IFoursquareBase
+        public sealed class Bounds : IFoursquareType
         {
             public LatLng ne { get; set; }
             public LatLng sw { get; set; }

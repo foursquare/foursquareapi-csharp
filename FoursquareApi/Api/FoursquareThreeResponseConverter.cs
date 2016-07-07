@@ -5,13 +5,14 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Foursquare.Model;
+using Foursquare.Response;
 
 namespace Foursquare.Api
 {
     internal class FoursquareThreeResponseConverter<T, V, C> : BaseResponseConverter
-        where T : IFoursquareBase
-        where V : IFoursquareBase
-        where C : IFoursquareBase
+        where T : IFoursquareType
+        where V : IFoursquareType
+        where C : IFoursquareType
     {
         public override bool CanConvert(Type objectType)
         {

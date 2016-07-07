@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Tip : AbstractLikeableBase, ISaveable
+    public class Tip : AbstractHasIdType, ISaveable
     {
         public override string id { get; set; }
         public long createdAt { get; set; }
@@ -32,7 +32,7 @@ namespace Foursquare.Model
         public string title { get; set; }
         public string compactText { get; set; }
 
-        public sealed class Justification : IFoursquareBase
+        public sealed class Justification : IFoursquareType
         {
             public string message { get; set; }
             public string justificationType { get; set; }

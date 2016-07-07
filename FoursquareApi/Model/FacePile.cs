@@ -9,7 +9,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class FacePile : IFoursquareBase
+    public sealed class FacePile : IFoursquareType
     {
         public string id { get; set; }
         public string interactionType { get; set; }

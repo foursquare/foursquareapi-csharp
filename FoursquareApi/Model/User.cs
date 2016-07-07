@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foursquare.Model
 {
-    public class User : IFoursquareBase
+    public class User : IFoursquareType
     {
         public const string PING_TYPE_OFF = "off";
         public const string PING_TYPE_ALWAYS = "always";
@@ -29,7 +29,6 @@ namespace Foursquare.Model
         public int coinBalance { get; set; }
         public Photo photo { get; set; }
         public Contact contact { get; set; }
-        public FoursquareList<Badge> badges { get; set; }
         public FoursquareList<Checkin> checkins { get; set; }
         public FoursquareList<Tip> tips { get; set; }
         //public FoursquareGroups<TipList> lists { get; set; }

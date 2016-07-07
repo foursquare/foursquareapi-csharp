@@ -9,8 +9,8 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class SuggestedModifications : IFoursquareBase
+    public sealed class SuggestedModifications : IFoursquareType
     {
-        public BrowseSuggestionsLocations.BrowseSuggestionsGeoBounds boundsExpansion { get; set; }
+        public SearchRecommendationLocations.SearchRecommendationGeoBounds boundsExpansion { get; set; }
     }
 }

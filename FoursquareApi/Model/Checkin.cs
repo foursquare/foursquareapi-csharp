@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Checkin : AbstractLikeableBase, IComparable<Checkin>
+    public class Checkin : AbstractHasIdType, IComparable<Checkin>
     {
         public override string id { get; set; }
         public long createdAt { get; set; }
@@ -22,7 +22,6 @@ namespace Foursquare.Model
         public User user { get; set; }
         public Venue venue { get; set; }
         public FoursquareList<Photo> photos { get; set; }
-        public FoursquareList<Badge> badges { get; set; }
         public ScoreInfo score { get; set; }
         public FoursquareList<Checkin> overlaps { get; set; }
         public FoursquareList<Fact> facts { get; set; }
@@ -33,26 +32,24 @@ namespace Foursquare.Model
         [JsonProperty("event")]
         public Event checkinEvent { get; set; }
         public DisplayGeo displayGeo { get; set; }
-        public PassiveLocation lastPassive { get; set; }
-        public Sticker sticker { get; set; }
         public LatLng location { get; set; }
         public FoursquareList<AppPost> posts { get; set; }
         public bool hasVenueLeaderboard { get; set; }
 
-        public sealed class ScoreInfo : IFoursquareBase
+        public sealed class ScoreInfo : IFoursquareType
         {
             public int total { get; set; }
             public List<Score> scores { get; set; }
         }
 
-        public sealed class Fact : IFoursquareBase
+        public sealed class Fact : IFoursquareType
         {
             public string type { get; set; }
             public string message { get; set; }
             public Photo icon { get; set; }
         }
 
-        public sealed class Shares : IFoursquareBase
+        public sealed class Shares : IFoursquareType
         {
             public bool facebook { get; set; }
             public bool twitter { get; set; }

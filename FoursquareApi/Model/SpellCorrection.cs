@@ -7,7 +7,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public class SpellCorrection : IFoursquareBase
+    public class SpellCorrection : IFoursquareType
     {
         public SpellSuggestion suggestion { get; set; }
         public SpellSuggestion correction { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class PageInfo : IFoursquareBase
+    public class PageInfo : IFoursquareType
     {
         public string description { get; set; }
         public string title { get; set; }

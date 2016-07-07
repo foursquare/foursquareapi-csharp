@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foursquare.Model
 {
-    public class Promoted : IFoursquareBase
+    public class Promoted : IFoursquareType
     {
         public String id { get; set; }
         public String type { get; set; }

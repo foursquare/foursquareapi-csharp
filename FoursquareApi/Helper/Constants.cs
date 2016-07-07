@@ -8,6 +8,9 @@ namespace Foursquare.Helper
 {
     internal static class Constants
     {
+        public const int DEFAULT_COUNT = 200;
+        public const int DEFAULT_PAGE_SIZE = 30;
+
         /** Governs whether check-ins are showed as "Nearby" or "Worldwide".*/
         public const int SAME_CITY_DISTANCE = 40000;
 
@@ -177,14 +180,5 @@ namespace Foursquare.Helper
         public static string MENU_TYPE_SERVICES = "services";
 
         public static char PARTICIPANTS_DELIMITER = ',';
-
-        public static int STATUS_SEND_ERROR = -1;
-        public static int STATUS_SENT = 0;
-        public static int STATUS_SENDING = 1;
-
-        public enum TasteInteractionState
-        {
-            LIKE = 1
-        }
     }
 }

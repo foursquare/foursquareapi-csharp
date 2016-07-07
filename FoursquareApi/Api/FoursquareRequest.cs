@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using Foursquare.Response;
 
 namespace Foursquare.Api
 {
@@ -118,7 +119,7 @@ namespace Foursquare.Api
             return content;
         }
 
-        public async Task<FoursquareResponse<T>> MakeRequest<T>(CancellationToken? cancellationToken = null) where T : IFoursquareBase
+        public async Task<FoursquareResponse<T>> MakeRequest<T>(CancellationToken? cancellationToken = null) where T : IFoursquareType
         {
             try
             {
@@ -176,8 +177,8 @@ namespace Foursquare.Api
         }
 
         public async Task<TwoResponses<T, V>> MakeRequest<T, V>(CancellationToken? cancellationToken = null)
-            where T : IFoursquareBase
-            where V : IFoursquareBase
+            where T : IFoursquareType
+            where V : IFoursquareType
         {
             try
             {
@@ -208,9 +209,9 @@ namespace Foursquare.Api
         }
 
         public async Task<ThreeResponses<T, V, C>> MakeRequest<T, V, C>(CancellationToken? cancellationToken = null)
-            where T : IFoursquareBase
-            where V : IFoursquareBase
-            where C : IFoursquareBase
+            where T : IFoursquareType
+            where V : IFoursquareType
+            where C : IFoursquareType
         {
             try
             {
@@ -241,10 +242,10 @@ namespace Foursquare.Api
         }
 
         public async Task<FourResponses<T, V, C, D>> MakeRequest<T, V, C, D>(CancellationToken? cancellationToken = null)
-            where T : IFoursquareBase
-            where V : IFoursquareBase
-            where C : IFoursquareBase
-            where D : IFoursquareBase
+            where T : IFoursquareType
+            where V : IFoursquareType
+            where C : IFoursquareType
+            where D : IFoursquareType
         {
             try
             {
@@ -275,11 +276,11 @@ namespace Foursquare.Api
         }
 
         public async Task<FiveResponses<T, V, C, D, E>> MakeRequest<T, V, C, D, E>(CancellationToken? cancellationToken = null)
-            where T : IFoursquareBase
-            where V : IFoursquareBase
-            where C : IFoursquareBase
-            where D : IFoursquareBase
-            where E: IFoursquareBase
+            where T : IFoursquareType
+            where V : IFoursquareType
+            where C : IFoursquareType
+            where D : IFoursquareType
+            where E: IFoursquareType
         {
             try
             {
@@ -347,7 +348,7 @@ namespace Foursquare.Api
         }
 
         private void ProcessNotifications<T>(FoursquareResponse<T> response)
-            where T : IFoursquareBase
+            where T : IFoursquareType
         {
             if (response == null || response.notifications == null)
             {
@@ -369,8 +370,8 @@ namespace Foursquare.Api
         }
 
         private void ProcessMultiNotifications<T,V>(TwoResponses<T, V> response)
-            where T : IFoursquareBase
-            where V : IFoursquareBase
+            where T : IFoursquareType
+            where V : IFoursquareType
         {
             if (response == null || response.notifications == null)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Photo : IFoursquareBase
+    public class Photo : IFoursquareType
     {
         public const string VISIBILITY_PUBLIC = "public";
         public const string VISIBILITY_FRIENDS = "friends";

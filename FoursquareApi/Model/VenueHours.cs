@@ -8,7 +8,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class VenueHours : IFoursquareBase
+    public sealed class VenueHours : IFoursquareType
     {
         public string status { get; set; }
         public bool isOpen { get; set; }

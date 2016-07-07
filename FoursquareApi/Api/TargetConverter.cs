@@ -46,9 +46,6 @@ namespace Foursquare.Api
                     break;
                 case Constants.TYPE_BADGE:
                     break;
-                case Constants.TYPE_SPECIAL:
-                    target.Object = jObject["object"].ToObject<Special>();
-                    break;
                 case Constants.TYPE_ACTIVITY:
                     break;
                 case Constants.TYPE_PHOTO:
@@ -60,9 +57,6 @@ namespace Foursquare.Api
                 case Constants.TYPE_URL:
                 case Constants.TYPE_PATH:
                     target.Object = jObject["object"].ToObject<Url>();
-                    break;
-                case Constants.TYPE_PLAN:
-                    target.Object = jObject["object"].ToObject<Plan>();
                     break;
                 case Constants.TYPE_PENDING_CHECKIN:
                     target.Object = jObject["object"].ToObject<PendingCheckin>();
@@ -77,12 +71,6 @@ namespace Foursquare.Api
                     break;
                 case Constants.TYPE_INBOX:
                     target.Object = jObject["object"].ToObject<Share>();
-                    break;
-                case Constants.TYPE_PLANCOMPOSE:
-                    target.Object = jObject["object"].ToObject<PlanCompose>();
-                    break;
-                case Constants.TYPE_ADD_STICKER:
-                    target.Object = jObject["object"].ToObject<Sticker>();
                     break;
                 default:
                     break;
@@ -122,11 +110,6 @@ namespace Foursquare.Api
                 case Constants.TYPE_EVENT:
                     serializer.Serialize(writer, target.Object, typeof(Foursquare.Model.Event));
                     break;
-                case Constants.TYPE_BADGE:
-                    break;
-                case Constants.TYPE_SPECIAL:
-                    serializer.Serialize(writer, target.Object, typeof(Special));
-                    break;
                 case Constants.TYPE_ACTIVITY:
                     break;
                 case Constants.TYPE_PHOTO:
@@ -138,9 +121,6 @@ namespace Foursquare.Api
                 case Constants.TYPE_URL:
                 case Constants.TYPE_PATH:
                     serializer.Serialize(writer, target.Object, typeof(Url));
-                    break;
-                case Constants.TYPE_PLAN:
-                    serializer.Serialize(writer, target.Object, typeof(Plan));
                     break;
                 case Constants.TYPE_PENDING_CHECKIN:
                     serializer.Serialize(writer, target.Object, typeof(PendingCheckin));
@@ -155,12 +135,6 @@ namespace Foursquare.Api
                     break;
                 case Constants.TYPE_INBOX:
                     serializer.Serialize(writer, target.Object, typeof(Share));
-                    break;
-                case Constants.TYPE_PLANCOMPOSE:
-                    serializer.Serialize(writer, target.Object, typeof(PlanCompose));
-                    break;
-                case Constants.TYPE_ADD_STICKER:
-                    serializer.Serialize(writer, target.Object, typeof(Sticker));
                     break;
                 default:
                     break;

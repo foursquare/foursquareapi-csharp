@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Venue : AbstractLikeableBase, ISaveable
+    public class Venue : AbstractHasIdType, ISaveable
     {
         public override string id { get; set; }
         public string name { get; set; }
@@ -37,8 +37,6 @@ namespace Foursquare.Model
         public Menu menu { get; set; }
         public VenueHours hours { get; set; }
         public VenueHours popular { get; set; }
-        public FoursquareList<Special> specials { get; set; }
-        //public FoursquareList<VenueUpdate> pageUpdates { get; set; }
         public BeenHere beenHere { get; set; }
         // Will contain key=url
         public Dictionary<string, string> reservations { get; set; }
@@ -83,13 +81,13 @@ namespace Foursquare.Model
             }
         }
 
-        public sealed class Mayor : IFoursquareBase
+        public sealed class Mayor : IFoursquareType
         {
             public int count { get; set; }
             public User user { get; set; }
         }
 
-        public sealed class Menu : IFoursquareBase
+        public sealed class Menu : IFoursquareType
         {
             public string mobileUrl { get; set; }
             public string url { get; set; }
@@ -98,20 +96,20 @@ namespace Foursquare.Model
             public string anchor { get; set; }
         }
 
-        public sealed class Delivery : IFoursquareBase
+        public sealed class Delivery : IFoursquareType
         {
             public string url { get; set; }
             public Dictionary<string, string> provider { get; set; }
         }
 
-        public sealed class Price : IFoursquareBase
+        public sealed class Price : IFoursquareType
         {
             public int tier { get; set; }
             public string message { get; set; }
             public string currency { get; set; }
         }
 
-        public sealed class BeenHere : IFoursquareBase
+        public sealed class BeenHere : IFoursquareType
         {
             public int count { get; set; }
             public bool marked { get; set; }

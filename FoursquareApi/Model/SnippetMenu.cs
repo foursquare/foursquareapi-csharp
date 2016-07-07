@@ -9,7 +9,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class SnippetMenu : IFoursquareBase
+    public sealed class SnippetMenu : IFoursquareType
     {
         public string text { get; set; }
         public string url { get; set; }

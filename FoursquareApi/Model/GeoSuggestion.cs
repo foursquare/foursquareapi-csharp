@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public sealed class GeoSuggestion : IFoursquareBase
+    public sealed class GeoSuggestion : IFoursquareType
     {
         public string name { get; set; }
         public string geoId { get; set; }

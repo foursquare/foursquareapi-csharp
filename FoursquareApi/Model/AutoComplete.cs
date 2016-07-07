@@ -10,7 +10,7 @@ using Foursquare.Api;
 namespace Foursquare.Model
 {
     [JsonConverter(typeof(AutoCompleteConverter))]
-    public class AutoComplete : IFoursquareBase
+    public class AutoComplete : IFoursquareType
     {
         public FoursquareList<Category> categories { get; set;}
         public FoursquareList<Venue> venues { get; set; }

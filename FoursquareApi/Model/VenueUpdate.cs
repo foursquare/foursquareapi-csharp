@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foursquare.Model
 {
-    public class VenueUpdate : IFoursquareBase
+    public class VenueUpdate : IFoursquareType
     {
         public long createdAt { get; set; }
         public string id { get; set; }

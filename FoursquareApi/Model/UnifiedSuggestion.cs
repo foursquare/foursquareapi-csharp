@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Foursquare.Model
 {
     [JsonConverter(typeof(UnifiedSuggestionConverter))]
-    public class UnifiedSuggestion : IFoursquareBase
+    public class UnifiedSuggestion : IFoursquareType
     {
         public string type { get; set; }
         public string id { get; set; }

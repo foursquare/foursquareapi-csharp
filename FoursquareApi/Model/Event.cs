@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Event : IFoursquareBase
+    public class Event : IFoursquareType
     {
         public bool allDay { get; set; }
         public long startAt { get; set; }
@@ -25,7 +25,7 @@ namespace Foursquare.Model
         public EventProvider provider { get; set; }
         public List<Category> categories { get; set; }
 
-        public sealed class EventProvider : IFoursquareBase
+        public sealed class EventProvider : IFoursquareType
         {
             public Image iconUrl { get; set; }
             public string name { get; set; }

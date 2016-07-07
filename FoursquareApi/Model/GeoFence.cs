@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public sealed class GeoFence : IFoursquareBase
+    public sealed class GeoFence : IFoursquareType
     {
         public double lat { get; set; }
         public double lng { get; set; }

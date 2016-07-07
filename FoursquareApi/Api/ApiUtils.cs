@@ -9,7 +9,7 @@ namespace Foursquare.Api
 {
     internal static class ApiUtils
     {
-        public static string GetLikeType(AbstractLikeableBase like)
+        public static string GetLikeType(AbstractHasIdType like)
         {
             if (like is Checkin)
             {
@@ -60,7 +60,7 @@ namespace Foursquare.Api
             return "facebook" == relationship;
         }
 
-        public static string GetType(IFoursquareBase type) 
+        public static string GetType(IFoursquareType type) 
         {
             if (type is Checkin)
             {
@@ -108,7 +108,7 @@ namespace Foursquare.Api
             }
         }
 
-        public static void AddBrowseExploreParams(this FoursquareRequest req, BrowseExploreFilters filters = null,
+        public static void AddBrowseExploreParams(this FoursquareRequest req, SearchRecommendationFilters filters = null,
             FoursquareLocation currentLocation = null, FoursquareLocation location = null, FoursquareLocation ne = null, FoursquareLocation sw = null,
             string near = null, string nearGeoId = null)
         {
@@ -143,7 +143,7 @@ namespace Foursquare.Api
                     var refinements = new Dictionary<string, string>();
                     for (int i = 0; i < filters.refinements.Count; i++)
                     {
-                        BrowseExploreRefinement item = filters.refinements[i];
+                        SearchRecommendationRefinement item = filters.refinements[i];
                         if (!string.IsNullOrEmpty(item.groupType))
                         {
                             if (refinements.ContainsKey(item.groupType))
@@ -189,7 +189,7 @@ namespace Foursquare.Api
             }
         }
 
-        private static string RefinementString(BrowseExploreRefinement refinement, int index)
+        private static string RefinementString(SearchRecommendationRefinement refinement, int index)
         {
             string output = string.Format("{0}-{1}", refinement.id, index);
             if (!string.IsNullOrEmpty(refinement.source)) 

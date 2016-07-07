@@ -6,7 +6,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Api
 {
-    internal class FoursquareResponseConverter<T> : BaseResponseConverter where T : IFoursquareBase
+    internal class FoursquareResponseConverter<T> : BaseResponseConverter where T : IFoursquareType
     {
         public override bool CanConvert(Type objectType)
         {

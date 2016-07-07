@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class LatLng : IFoursquareBase
+    public class LatLng : IFoursquareType
     {
         public double lat { get; set; }
         public double lng { get; set; }

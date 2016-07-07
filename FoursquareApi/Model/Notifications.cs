@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Notifications : IFoursquareBase
+    public class Notifications : IFoursquareType
     {
         public string type { get; set; }
         public Item item { get; set; }
 
-        public sealed class Item : IFoursquareBase
+        public sealed class Item : IFoursquareType
         {
             public int unreadCount { get; set; }
             public int count { get; set; }

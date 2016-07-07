@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Contact : IFoursquareBase
+    public class Contact : IFoursquareType
     {
         public string email { get; set; }
         public string facebook { get; set; }

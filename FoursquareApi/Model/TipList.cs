@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Foursquare.Model
 {
-    public class TipList : IFoursquareBase
+    public class TipList : IFoursquareType
     {
         public string id { get; set; }
         public string name { get; set; }

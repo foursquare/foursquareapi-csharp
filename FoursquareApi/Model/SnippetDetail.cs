@@ -11,7 +11,7 @@ using Foursquare.Api;
 namespace Foursquare.Model
 {
     [JsonConverter(typeof(SnippetConverter))]
-    public class SnippetDetail : IFoursquareBase
+    public class SnippetDetail : IFoursquareType
     {
         public string type { get; set; }
         public FoursquareList<FacePile> facePile { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class PendingCheckin : IFoursquareBase
+    public class PendingCheckin : IFoursquareType
     {
         public string id { get; set; }
         public long createdAt { get; set; }

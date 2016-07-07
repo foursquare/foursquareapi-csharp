@@ -8,7 +8,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class VenueTasteJustification : IFoursquareBase
+    public sealed class VenueTasteJustification : IFoursquareType
     {
         public Image icon { get; set; }
         public bool firstPosition { get; set; }

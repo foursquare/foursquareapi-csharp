@@ -10,7 +10,7 @@ namespace Foursquare.Model
     {
         public Item item { get; set; }
 
-        public sealed class Item : IFoursquareBase
+        public sealed class Item : IFoursquareType
         {
             public string promptText { get; set; }
             public bool overrideMute { get; set; }

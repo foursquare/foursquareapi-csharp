@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Thumbnail : IFoursquareBase
+    public class Thumbnail : IFoursquareType
     {
         public string id { get; set; }
         public Photo photo { get; set; }

@@ -10,12 +10,12 @@ using Newtonsoft.Json;
 
 namespace Foursquare.Model
 {
-    public sealed class SpellSuggestion : IFoursquareBase
+    public sealed class SpellSuggestion : IFoursquareType
     {
         public QueryTarget target { get; set; }
         public TextEntities message { get; set; }
 
-        public sealed class QueryTarget : IFoursquareBase
+        public sealed class QueryTarget : IFoursquareType
         {
             public string type { get; set; }
             public string url { get; set; }
@@ -23,7 +23,7 @@ namespace Foursquare.Model
             public QueryTargetParams queryParams { get; set; }
         }
 
-        public sealed class QueryTargetParams : IFoursquareBase {
+        public sealed class QueryTargetParams : IFoursquareType {
 
         }
     }

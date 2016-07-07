@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class AppPost : IFoursquareBase
+    public class AppPost : IFoursquareType
     {
         public string id { get; set; }
         public long createdAt { get; set; }

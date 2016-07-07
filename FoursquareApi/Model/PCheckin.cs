@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class PCheckin : AbstractLikeableBase
+    public class PCheckin : AbstractHasIdType
     {
         public override string id { get; set; }
     }

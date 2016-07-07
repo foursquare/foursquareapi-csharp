@@ -8,7 +8,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public class Justification : IFoursquareBase
+    public class Justification : IFoursquareType
     {
         public List<Entity> entities { get; set; }
         public string text { get; set; }

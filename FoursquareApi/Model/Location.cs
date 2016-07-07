@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class Location : IFoursquareBase
+    public class Location : IFoursquareType
     {
         public string address { get; set; }
         public string crossStreet { get; set; }

@@ -9,7 +9,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class SnippetHours : IFoursquareBase
+    public sealed class SnippetHours : IFoursquareType
     {
         public string text { get; set; }
     }

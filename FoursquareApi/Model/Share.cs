@@ -2,7 +2,7 @@
 
 namespace Foursquare.Model
 {
-    public sealed class Share : IFoursquareBase
+    public sealed class Share : IFoursquareType
     {
         public string id { get; set; }
         public User user { get; set; }

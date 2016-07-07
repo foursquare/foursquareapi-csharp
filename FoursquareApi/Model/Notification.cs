@@ -8,7 +8,7 @@ using System.Text;
 namespace Foursquare.Model
 {
     [JsonConverter(typeof(NotificationConverter))]
-    public class Notification : IFoursquareBase
+    public class Notification : IFoursquareType
     {
         public string type { get; set; }
         public bool alert { get; set; }

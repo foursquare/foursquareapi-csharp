@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class RecentVenues : IFoursquareBase
+    public class RecentVenues : IFoursquareType
     {
         public List<RecentVenue> items { get; set; }
 

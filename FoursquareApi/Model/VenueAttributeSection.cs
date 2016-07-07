@@ -8,7 +8,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class VenueAttributeSection : IFoursquareBase
+    public sealed class VenueAttributeSection : IFoursquareType
     {
         public string section { get; set; }
         public string displayType { get; set; }

@@ -8,7 +8,7 @@ using Foursquare.Model;
 
 namespace Foursquare.Model
 {
-    public sealed class Categories : IFoursquareBase
+    public sealed class Categories : IFoursquareType
     {
         public List<Category> categories { get; set; }
     }

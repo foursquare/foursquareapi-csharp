@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Foursquare.Model
 {
-    public class ImageAd : IFoursquareBase
+    public class ImageAd : IFoursquareType
     {
         public String id { get; set; }
         public String title { get; set; }

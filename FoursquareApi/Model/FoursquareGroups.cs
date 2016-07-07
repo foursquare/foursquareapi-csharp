@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
-    public class FoursquareGroups<T> : IFoursquareBase where T : IFoursquareBase
+    public class FoursquareGroups<T> : IFoursquareType where T : IFoursquareType
     {
         public Int32 count { get; set; }
         public string summary { get; set; }
