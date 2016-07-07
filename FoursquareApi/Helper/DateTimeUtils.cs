@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Foursquare.Helper
 {
     internal static class DateTimeUtils
     {
-        private static DateTime EpochDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        private static DateTimeOffset EpochDTO = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        private static readonly DateTime EpochDT = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTimeOffset EpochDTO = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
 
         public static long CurrentTimeMillis()
         {

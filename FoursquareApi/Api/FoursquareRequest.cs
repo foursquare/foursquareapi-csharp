@@ -44,12 +44,12 @@ namespace Foursquare.Api
         public string Url { get; set; }
         public HttpMethod Method { get; set; }
         public Stream File { get; set; }
-        private Dictionary<string, string> Params { get; set; }
+        private Dictionary<string, string> Params { get; }
         private List<FoursquareRequest> SubRequests { get; set; }
 
-        private CancellationTokenSource _cancellationToken = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public void AddParam(string key, string value)
+        public FoursquareRequest AddParam(string key, string value)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -63,14 +63,16 @@ namespace Foursquare.Api
                 }
 
             }
+            return this;
         }
 
-        public void AddParamIf(string key, bool value)
+        public FoursquareRequest AddParamIf(string key, bool value)
         {
             if (value)
             {
                 AddParam(key, "true");
             }
+            return this;
         }
 
         public bool HasParam(string key)
@@ -78,31 +80,32 @@ namespace Foursquare.Api
             return !string.IsNullOrEmpty(key) && Params.ContainsKey(key);
         }
 
-        public void AddSubRequest(FoursquareRequest request)
+        public FoursquareRequest AddSubRequest(FoursquareRequest request)
         {
             SubRequests = SubRequests ?? new List<FoursquareRequest>();
             SubRequests.Add(request);
+            return this;
         }
 
         public string GetFullUrl()
         {
-            StringBuilder fullUrl = new StringBuilder(Url);
+            var fullUrl = new StringBuilder(Url);
             if (!Url.EndsWith("?"))
             {
                 fullUrl.Append("?");
             }
             foreach(var param in Params) {
-                fullUrl.Append(string.Format("{0}={1}",param.Key, Uri.EscapeDataString(param.Value)));
+                fullUrl.Append($"{param.Key}={Uri.EscapeDataString(param.Value)}");
                 fullUrl.Append("&");
             }
             if (SubRequests != null)
             {
-                List<string> requestUris = new List<string>();
+                var requestUris = new List<string>();
                 foreach (var request in SubRequests)
                 {
                     requestUris.Add(Uri.EscapeDataString(request.GetFullUrl()));
                 }
-                fullUrl.Append(string.Format("{0}={1}", "requests", string.Join(",", requestUris)));
+                fullUrl.Append($"requests={string.Join(",", requestUris)}");
             }
             return fullUrl.ToString();
         }
@@ -128,9 +131,8 @@ namespace Foursquare.Api
                     cancellationToken = _cancellationToken.Token;
                 }
 
-                string respString = string.Empty;
-                FoursquareResponse<T> parsedResponse = null;
-                HttpResponseMessage responseMessage = null;
+                FoursquareResponse<T> parsedResponse;
+                HttpResponseMessage responseMessage;
                 switch (Method)
                 {
                     case HttpMethod.GET:
@@ -152,7 +154,7 @@ namespace Foursquare.Api
                         throw new Exception("Unsupported HttpMethod type");
                 }
                 HandleHttpResponseMessage(responseMessage);
-                respString = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                string respString = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                 if (!string.IsNullOrEmpty(respString))
                 {
                     parsedResponse = JsonConvert.DeserializeObject<FoursquareResponse<T>>(respString, new FoursquareResponseConverter<T>());
@@ -182,10 +184,6 @@ namespace Foursquare.Api
         {
             try
             {
-                if (cancellationToken == null)
-                {
-                    cancellationToken = _cancellationToken.Token;
-                }
                 switch (Method)
                 {
                     case HttpMethod.GET:
@@ -215,10 +213,6 @@ namespace Foursquare.Api
         {
             try
             {
-                if (cancellationToken == null)
-                {
-                    cancellationToken = _cancellationToken.Token;
-                }
                 switch (Method)
                 {
                     case HttpMethod.GET:
@@ -249,10 +243,6 @@ namespace Foursquare.Api
         {
             try
             {
-                if (cancellationToken == null)
-                {
-                    cancellationToken = _cancellationToken.Token;
-                }
                 switch (Method)
                 {
                     case HttpMethod.GET:
@@ -284,10 +274,6 @@ namespace Foursquare.Api
         {
             try
             {
-                if (cancellationToken == null)
-                {
-                    cancellationToken = _cancellationToken.Token;
-                }
                 switch (Method)
                 {
                     case HttpMethod.GET:
@@ -310,13 +296,13 @@ namespace Foursquare.Api
             }
         }
 
-        private async Task<string> MakeGetRequest(CancellationToken? cancellationToken = null)
+        private async Task<string> MakeGetRequest(CancellationToken? cancellationToken)
         {
-            HttpResponseMessage msg = await GetClient().GetAsync(GetFullUrl(), cancellationToken.Value).ConfigureAwait(false);
+            HttpResponseMessage msg = await GetClient().GetAsync(GetFullUrl(), cancellationToken ?? _cancellationToken.Token).ConfigureAwait(false);
             string resp = await msg.Content.ReadAsStringAsync();
             if (string.IsNullOrEmpty(resp))
             {
-                throw new FoursquareNetworkException(FoursquareNetworkException.NetworkError.NoData);
+                throw new FoursquareNetworkException();
             }
             return resp;
         }
@@ -344,50 +330,53 @@ namespace Foursquare.Api
 
         private void HandleHttpResponseMessage(HttpResponseMessage msg)
         {
-            if (msg == null) return;
         }
 
-        private void ProcessNotifications<T>(FoursquareResponse<T> response)
+        private static void ProcessNotifications<T>(FoursquareResponse<T> response)
             where T : IFoursquareType
         {
-            if (response == null || response.notifications == null)
+            if (response?.notifications == null)
             {
                 return;
             }
 
             foreach (var notif in response.notifications)
             {
-                if (notif.type == "pendingFriendRequests")
+                switch (notif.type)
                 {
-                }
-                else if (notif.type == "notificationTray")
-                {
-                }
-                else if (notif.type == "plans")
-                {
+                    case "pendingFriendRequests":
+                        break;
+                    case "notificationTray":
+                        break;
+                    case "plans":
+                        break;
+                    default:
+                        break;
                 }
             }
         }
 
-        private void ProcessMultiNotifications<T,V>(TwoResponses<T, V> response)
+        private static void ProcessMultiNotifications<T,V>(TwoResponses<T, V> response)
             where T : IFoursquareType
             where V : IFoursquareType
         {
-            if (response == null || response.notifications == null)
+            if (response?.notifications == null)
             {
                 return;
             }
 
             foreach (var notif in response.notifications)
             {
-                if (notif.type == "pendingFriendRequests")
+                switch (notif.type)
                 {
-                }
-                else if (notif.type == "notificationTray")
-                {
-                }
-                else if (notif.type == "plans")
-                {
+                    case "pendingFriendRequests":
+                        break;
+                    case "notificationTray":
+                        break;
+                    case "plans":
+                        break;
+                    default:
+                        break;
                 }
             }
         }

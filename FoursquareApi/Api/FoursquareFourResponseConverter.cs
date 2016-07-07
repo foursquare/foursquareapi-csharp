@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Foursquare.Model;
@@ -38,27 +35,24 @@ namespace Foursquare.Api
             }
 
             JToken response = jObject["response"];
-            if (response != null)
+            if (response?["responses"] != null)
             {
-                if (response["responses"] != null)
+                var responses = response["responses"].Children().ToList();
+                if (responses.Count > 0)
                 {
-                    var responses = response["responses"].Children().ToList();
-                    if (responses.Count > 0)
-                    {
-                        output.SubResponse1 = ParseResponse<T>(responses.ElementAt(0));
-                    }
-                    if (responses.Count > 1)
-                    {
-                        output.SubResponse2 = ParseResponse<V>(responses.ElementAt(1));
-                    }
-                    if (responses.Count > 2)
-                    {
-                        output.SubResponse3 = ParseResponse<C>(responses.ElementAt(2));
-                    }
-                    if (responses.Count > 3)
-                    {
-                        output.SubResponse4 = ParseResponse<D>(responses.ElementAt(3));
-                    }
+                    output.SubResponse1 = ParseResponse<T>(responses.ElementAt(0));
+                }
+                if (responses.Count > 1)
+                {
+                    output.SubResponse2 = ParseResponse<V>(responses.ElementAt(1));
+                }
+                if (responses.Count > 2)
+                {
+                    output.SubResponse3 = ParseResponse<C>(responses.ElementAt(2));
+                }
+                if (responses.Count > 3)
+                {
+                    output.SubResponse4 = ParseResponse<D>(responses.ElementAt(3));
                 }
             }
 

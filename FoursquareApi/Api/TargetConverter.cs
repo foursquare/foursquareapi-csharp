@@ -17,8 +17,7 @@ namespace Foursquare.Api
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject jObject = JObject.Load(reader);
-            var target = new Target();
-            target.Type = jObject["type"].ToString();
+            var target = new Target {Type = jObject["type"].ToString()};
 
             switch (target.Type)
             {
@@ -42,7 +41,7 @@ namespace Foursquare.Api
                     target.Object = jObject["object"].ToObject<VenueUpdate>();
                     break;
                 case Constants.TYPE_EVENT:
-                    target.Object = jObject["object"].ToObject<Foursquare.Model.Event>();
+                    target.Object = jObject["object"].ToObject<Event>();
                     break;
                 case Constants.TYPE_BADGE:
                     break;
@@ -82,6 +81,11 @@ namespace Foursquare.Api
         {
             var target = value as Target;
 
+            if (target == null)
+            {
+                return;
+            }
+
             writer.WriteStartObject();
             writer.WritePropertyName("type");
             serializer.Serialize(writer, target.Type);
@@ -108,7 +112,7 @@ namespace Foursquare.Api
                     serializer.Serialize(writer, target.Object, typeof(VenueUpdate));
                     break;
                 case Constants.TYPE_EVENT:
-                    serializer.Serialize(writer, target.Object, typeof(Foursquare.Model.Event));
+                    serializer.Serialize(writer, target.Object, typeof(Event));
                     break;
                 case Constants.TYPE_ACTIVITY:
                     break;

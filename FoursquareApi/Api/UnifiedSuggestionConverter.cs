@@ -18,10 +18,12 @@ namespace Foursquare.Api
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject jObject = JObject.Load(reader);
-            var sugg = new UnifiedSuggestion();
-            sugg.type = jObject["type"].ToString();
-            sugg.id = jObject["id"].ToString();
-            sugg.text = jObject["text"].ToString();
+            var sugg = new UnifiedSuggestion
+            {
+                type = jObject["type"].ToString(),
+                id = jObject["id"].ToString(),
+                text = jObject["text"].ToString()
+            };
             try
             {
                 var ents = new List<Entity>();
@@ -30,6 +32,7 @@ namespace Foursquare.Api
             }
             catch (Exception)
             {
+                // We dont care
             }
 
             switch (sugg.type)
@@ -49,6 +52,11 @@ namespace Foursquare.Api
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var target = value as UnifiedSuggestion;
+
+            if (target == null)
+            {
+                return;
+            }
 
             writer.WriteStartObject();
             writer.WritePropertyName("type");

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace Foursquare.Model
+﻿namespace Foursquare.Model
 {
     public enum LocationSource
     {

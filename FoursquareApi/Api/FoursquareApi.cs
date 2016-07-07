@@ -4,15 +4,13 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-
-using Foursquare.Model;
+using System.Globalization;
 using System.IO;
 using System.Threading;
-using System.Globalization;
+using System.Threading.Tasks;
 using Foursquare.Helper;
+using Foursquare.Model;
 using Foursquare.Response;
 
 namespace Foursquare.Api
@@ -22,24 +20,23 @@ namespace Foursquare.Api
     /// </summary>
     public sealed class FoursquareApi : IFoursquareApi
     {
-        private const string _apiBase = "https://api.foursquare.com/v2/";
-        private static string _appLocale;
+        private const string ApiBase = "https://api.foursquare.com/v2/";
 
-        private string clientId;
-        private string clientSecret;
-        private string version;
+        private readonly string _clientId;
+        private readonly string _clientSecret;
+        private readonly string _version;
 
-        internal static string UserLanguage { get { return _appLocale; } }
+        internal static string UserLanguage { get; private set; }
 
         public string Token { get; set; }
 
         public FoursquareApi(string clientId, string clientSecret, string locale = "en", string version = "20160516") 
         {
-            this.clientId = clientId;
-            this.clientSecret = clientSecret;
-            this.version = version;
+            _clientId = clientId;
+            _clientSecret = clientSecret;
+            _version = version;
 
-            _appLocale = locale;
+            UserLanguage = locale;
         }
 
         public bool IsLoggedIn()
@@ -50,7 +47,7 @@ namespace Foursquare.Api
         #region Users
         public Task<FoursquareResponse<UserResponse>> UserDetails(string userId)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "users/{0}", userId));
+            var req = new FoursquareRequest(ApiBase + $"users/{userId}");
             AddCommonParams(ref req);
             return req.MakeRequest<UserResponse>();
         }
@@ -58,7 +55,7 @@ namespace Foursquare.Api
         public Task<FoursquareResponse<HistorySearch>> SearchHistory(string id, int offset = 0, int limit = Constants.DEFAULT_PAGE_SIZE, string geoId = null,
             string venueId = null, string categoryId = null, string friendId = null, string stickerId = null, string near = null, string llBounds = null, FoursquareLocation loc = null) 
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "users/{0}/historysearch", id));
+            var req = new FoursquareRequest(ApiBase + $"users/{id}/historysearch");
             req.AddParam("offset", offset.ToString());
             req.AddParam("limit", limit.ToString());
             req.AddParam("venueIds", venueId);
@@ -75,7 +72,7 @@ namespace Foursquare.Api
 
         public Task<FoursquareResponse<PhotosResponse>> UserPhotos(string id = "self", int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "users/{1}/photos", id));
+            var req = new FoursquareRequest(ApiBase + $"users/{id}/photos");
             req.AddParam("limit", limit.ToString());
             req.AddParam("offset", offset.ToString());
             AddCommonParams(ref req);
@@ -91,7 +88,7 @@ namespace Foursquare.Api
             List<string> excludeVenues = null, List<string> includeVenues = null, string referralId = null, SearchRecommendationLocations.SearchRecommendationGeoBounds bounds = null,
             int initialOffset = 0)
         {
-            var req = new FoursquareRequest(_apiBase + "search/recommendations");
+            var req = new FoursquareRequest(ApiBase + "search/recommendations");
             if (searchRadius.HasValue)
             {
                 req.AddParam("radius", searchRadius.GetValueOrDefault(0).ToString());
@@ -161,16 +158,18 @@ namespace Foursquare.Api
         #region Photos
         public Task<FoursquareResponse<Empty>> DeletePhoto(string id)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "photos/{0}/delete", id), FoursquareRequest.HttpMethod.POST);
+            var req = new FoursquareRequest(ApiBase + $"photos/{id}/delete", FoursquareRequest.HttpMethod.POST);
             AddCommonParams(ref req);
             return req.MakeRequest<Empty>();
         }
 
         public Task<FoursquareResponse<PhotoResponse>> AddPhoto(Stream file, string checkinId = null, string venueId = null, string tipId = null, bool twitter = false, bool facebook = false, bool makePublic = false, FoursquareLocation loc = null)
         {
-            var req = new FoursquareRequest(_apiBase + "photos/add", FoursquareRequest.HttpMethod.PHOTO_POST);
-            req.File = file;
-            string broadcast = string.Empty;
+            var req = new FoursquareRequest(ApiBase + "photos/add", FoursquareRequest.HttpMethod.PHOTO_POST)
+            {
+                File = file
+            };
+            var broadcast = string.Empty;
             if (twitter)
             {
                 broadcast += "twitter";
@@ -208,7 +207,7 @@ namespace Foursquare.Api
             string promotedTipId = null, string intent = null, FoursquareLocation loc = null,
             string tasteIds = null, string searchTipId = null)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "venues/{0}", id));
+            var req = new FoursquareRequest(ApiBase + $"venues/{id}");
             req.AddParam("intent", intent);
             req.AddParam("tasteIds", tasteIds);
             req.AddParam("searchTipId", searchTipId);
@@ -220,7 +219,7 @@ namespace Foursquare.Api
 
         public Task<FoursquareResponse<EventsResponse>> VenueEvents(string id, string intent = null)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "venues/{0}/events", id));
+            var req = new FoursquareRequest(ApiBase + $"venues/{id}/events");
             req.AddParam("intent", intent);
             AddCommonParams(ref req);
             return req.MakeRequest<EventsResponse>();
@@ -234,7 +233,7 @@ namespace Foursquare.Api
             string intent = "checkin", 
             string wifi = null)
         {
-            var req = new FoursquareRequest(_apiBase + "venues/search");
+            var req = new FoursquareRequest(ApiBase + "venues/search");
             req.AddParam("query", query);
             req.AddParam("limit", limit.ToString());
             req.AddParam("appSource", appSource);
@@ -250,7 +249,7 @@ namespace Foursquare.Api
             int limit = Constants.DEFAULT_PAGE_SIZE, FoursquareLocation loc = null, CancellationTokenSource cancel = null, 
             bool searched = false, string nearbyVenueIds = null)
         {
-            var req = new FoursquareRequest(_apiBase + "search/autocomplete");
+            var req = new FoursquareRequest(ApiBase + "search/autocomplete");
             req.AddParam("limit", limit.ToString());
             req.AddParam("group", groups);
             req.AddParam("query", query);
@@ -265,12 +264,12 @@ namespace Foursquare.Api
             }
             AddCommonParams(ref req);
             AddLocationParams(ref req, loc);
-            return req.MakeRequest<AutoComplete>(cancel == null ? new CancellationTokenSource().Token : cancel.Token);
+            return req.MakeRequest<AutoComplete>(cancel?.Token ?? new CancellationTokenSource().Token);
         }
         
         public Task<FoursquareResponse<FoursquareGeocode>> GeocodeAutocomplete(string query, FoursquareLocation loc, int limit = 5)
         {
-            var req = new FoursquareRequest(_apiBase + "geo/geocode");
+            var req = new FoursquareRequest(ApiBase + "geo/geocode");
             req.AddParam("maxInterpretations", limit.ToString(CultureInfo.InvariantCulture));
             req.AddParam("autocomplete", "true");
             req.AddParam("query", query);
@@ -284,7 +283,7 @@ namespace Foursquare.Api
             string promotedTipId = null, string searchTipId = null, 
             int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0, string group = null, FoursquareLocation loc = null)
         {
-            var req = new FoursquareRequest(_apiBase + string.Format("venues/{0}/tips", id));
+            var req = new FoursquareRequest(ApiBase + $"venues/{id}/tips");
             req.AddParam("sort", sort);
             req.AddParam("limit", limit.ToString());
             req.AddParam("offset", offset.ToString());
@@ -301,7 +300,7 @@ namespace Foursquare.Api
         public Task<FoursquareResponse<PhotosResponse>> VenuePhotos(string id,
             int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0, FoursquareLocation loc = null)
         {
-            var req = new FoursquareRequest(_apiBase + string.Format("venues/{0}/photos", id));
+            var req = new FoursquareRequest(ApiBase + $"venues/{id}/photos");
             req.AddParam("limit", limit.ToString());
             req.AddParam("offset", offset.ToString());
             AddLocationParams(ref req, loc);
@@ -311,7 +310,7 @@ namespace Foursquare.Api
 
         public Task<FoursquareResponse<Categories>> Categories(FoursquareLocation loc = null, string countryCode = null)
         {
-            var req = new FoursquareRequest(_apiBase + "venues/categories");
+            var req = new FoursquareRequest(ApiBase + "venues/categories");
             req.AddParam("cc", countryCode);
             AddLocationParams(ref req, loc);
             AddCommonParams(ref req);
@@ -320,7 +319,7 @@ namespace Foursquare.Api
 
         public Task<FoursquareResponse<AddVenue>> AddVenue(Venue v, string category, FoursquareLocation loc, bool isPrivate = false, string dupeDetectedOverrideKey = null)
         {
-            var req = new FoursquareRequest(_apiBase + "venues/add", FoursquareRequest.HttpMethod.POST);
+            var req = new FoursquareRequest(ApiBase + "venues/add", FoursquareRequest.HttpMethod.POST);
             req.AddParam("name", v.name);
             req.AddParam("primaryCategoryId", category);
             req.AddParam("ignoreDuplicatesKey", dupeDetectedOverrideKey);
@@ -351,7 +350,7 @@ namespace Foursquare.Api
         #region Tips
         public Task<FoursquareResponse<TipResponse>> TipDetail(string id, string intent = null, FoursquareLocation loc = null)
         {
-            var req = new FoursquareRequest(_apiBase + "tips/" + id);
+            var req = new FoursquareRequest(ApiBase + "tips/" + id);
             req.AddParam("intent", intent);
             AddLocationParams(ref req, loc);
             AddCommonParams(ref req);
@@ -360,7 +359,7 @@ namespace Foursquare.Api
 
         public Task<FoursquareResponse<TipsResponse>> UserTips(string id, string sort = null, int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0, string subjectId = null, FoursquareLocation loc = null)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "users/{0}/tips",id));
+            var req = new FoursquareRequest(ApiBase + $"users/{id}/tips");
             req.AddParam("sort", sort);
             req.AddParam("limit", limit.ToString());
             req.AddParam("offset", offset.ToString());
@@ -374,7 +373,7 @@ namespace Foursquare.Api
         #region Lists and Saves
         public Task<FoursquareResponse<TipListResponse>> ListDetail(string id, int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0, FoursquareLocation loc = null, string includeVenues = null, string sort = null)
         {
-            var req = new FoursquareRequest(_apiBase + string.Format("lists/{0}", id));
+            var req = new FoursquareRequest(ApiBase + $"lists/{id}");
             req.AddParam("limit", limit.ToString());
             req.AddParam("offset", offset.ToString());
             req.AddParam("sort", sort);
@@ -386,7 +385,7 @@ namespace Foursquare.Api
 
         public Task<FoursquareResponse<TipListsResponse>> GetLists(string userId, string group, FoursquareLocation location = null, int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0, bool sortNearby = false)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "users/{0}/lists", string.IsNullOrEmpty(userId) ? "self" : userId));
+            var req = new FoursquareRequest(ApiBase + $"users/{(string.IsNullOrEmpty(userId) ? "self" : userId)}/lists");
             req.AddParam("limit", limit.ToString());
             req.AddParam("group", group);
             req.AddParam("offset", offset.ToString());
@@ -399,7 +398,7 @@ namespace Foursquare.Api
 
         public Task<FoursquareResponse<TipListResponse>> CreateList(string listName)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "lists/add"), FoursquareRequest.HttpMethod.POST);
+            var req = new FoursquareRequest(ApiBase + "lists/add", FoursquareRequest.HttpMethod.POST);
             req.AddParam("name", listName);
             AddCommonParams(ref req);
 
@@ -407,7 +406,7 @@ namespace Foursquare.Api
         }
         public Task<FoursquareResponse<Empty>> DeleteList(string listId)
         {
-            var req = new FoursquareRequest(string.Format(_apiBase + "lists/{0}/delete", listId), FoursquareRequest.HttpMethod.POST);
+            var req = new FoursquareRequest(ApiBase + $"lists/{listId}/delete", FoursquareRequest.HttpMethod.POST);
 
             AddCommonParams(ref req);
 
@@ -433,7 +432,7 @@ namespace Foursquare.Api
                     break;
             }
 
-            var req = new FoursquareRequest(string.Format(_apiBase + String.Format(endPoint, listId)), FoursquareRequest.HttpMethod.POST);
+            var req = new FoursquareRequest(string.Format(ApiBase + string.Format(endPoint, listId)), FoursquareRequest.HttpMethod.POST);
             req.AddParam(idKey, id);
 
             AddCommonParams(ref req);
@@ -450,13 +449,13 @@ namespace Foursquare.Api
             }
             else
             {
-                refRequest.AddParam("client_id", clientId);
-                refRequest.AddParam("client_secret", clientSecret);
+                refRequest.AddParam("client_id", _clientId);
+                refRequest.AddParam("client_secret", _clientSecret);
             }
 
             if (!refRequest.HasParam("v"))
             {
-                refRequest.AddParam("v", version);
+                refRequest.AddParam("v", _version);
             }
 
         }
@@ -467,22 +466,6 @@ namespace Foursquare.Api
             {
                 refRequest.AddParam("ll", location.Lat.ToString(CultureInfo.InvariantCulture) + "," + location.Lng.ToString(CultureInfo.InvariantCulture));
                 refRequest.AddParam("llAcc", location.Accuracy.ToString(CultureInfo.InvariantCulture));
-            }
-        }
-
-        private static void AddCallbackUriParams(ref FoursquareRequest refRequest, CallbackUri callback)
-        {
-            if (callback.args != null)
-            {
-                foreach (var item in callback.args)
-                {
-                    refRequest.AddParam(item.key, item.value);
-                }
-            }
-
-            if (callback.method == "post")
-            {
-                refRequest.Method = FoursquareRequest.HttpMethod.POST;
             }
         }
     }

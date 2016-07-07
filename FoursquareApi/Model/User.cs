@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
 namespace Foursquare.Model
 {
@@ -11,7 +8,6 @@ namespace Foursquare.Model
         public const string PING_TYPE_ALWAYS = "always";
         public const string PING_TYPE_NEARBY = "nearby";
 
-        public User() { }
         public virtual string id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -47,21 +43,9 @@ namespace Foursquare.Model
         public bool isAnonymous { get; set; }
 
         // Helpers
-        public string FullName
-        {
-            get
-            {
-                return firstName + " " + lastName ?? "";
-            }
-        }
+        public string FullName => firstName + " " + lastName ?? "";
 
-        public Checkin LastCheckin
-        {
-            get
-            {
-                return (checkins != null && checkins.count > 0 && checkins.items.Count > 0) ? checkins.items.First() : null;
-            }
-        }
+        public Checkin LastCheckin => (checkins != null && checkins.count > 0 && checkins.items.Count > 0) ? checkins.items.First() : null;
 
         public bool IsSelf()
         {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Foursquare.Model
+﻿namespace Foursquare.Model
 {
     public class RecentVenue : IFoursquareType
     {
@@ -13,7 +7,7 @@ namespace Foursquare.Model
         public PCheckin pcheckin { get; set; }
         public bool HasSelfTip()
         {
-            if (venue != null && venue.tips != null)
+            if (venue?.tips != null)
             {
                 foreach (var item in venue.tips.groups)
                 {

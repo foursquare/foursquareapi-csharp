@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
@@ -41,12 +37,6 @@ namespace Foursquare.Model
             return String.Equals(visibility, VISIBILITY_FRIENDS);
         }
 
-        public string OriginalUrl
-        {
-            get
-            {
-                return prefix + "original" + suffix;
-            }
-        }
+        public string OriginalUrl => prefix + "original" + suffix;
     }
 }

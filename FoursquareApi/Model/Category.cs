@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Foursquare.Model
 {
@@ -19,25 +15,17 @@ namespace Foursquare.Model
         public override bool Equals(object obj)
         {
             var cat = obj as Category;
-            if (cat == null)
-            {
-                return false;
-            }
-            return cat.id.Equals(this.id);
+            return cat != null && cat.id.Equals(id);
         }
 
         public override int GetHashCode()
         {
-            return this.id.GetHashCode();
+            return id.GetHashCode();
         }
 
         public bool Equals(Category obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            return this.id.Equals((obj as Category).id);
+            return obj != null && id.Equals(obj.id);
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foursquare.Model
 {
@@ -57,11 +54,11 @@ namespace Foursquare.Model
 
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is Venue))
+            if (!(obj is Venue))
             {
                 return false;
             }
-            return (obj as Venue).id == id;
+            return ((Venue) obj).id == id;
         }
 
         public override int GetHashCode()

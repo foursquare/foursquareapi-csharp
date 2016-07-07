@@ -15,10 +15,7 @@ namespace Foursquare.Model
         public Venue venue { get; set; }
         public User fromUser { get; set; }
 
-        public bool IsSaved
-        {
-            get { return !string.IsNullOrEmpty(state) && Constants.SHARE_STATE_SAVED == state; }
-        }
+        public bool IsSaved => !string.IsNullOrEmpty(state) && Constants.SHARE_STATE_SAVED == state;
 
         public Venue GetVenue()
         {

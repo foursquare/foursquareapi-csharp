@@ -16,7 +16,6 @@ namespace Foursquare.Api
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject jObject = JObject.Load(reader);
-            string type = jObject["type"].ToString();
 
             Notification n = new Notification();
             serializer.Populate(jObject.CreateReader(), n);

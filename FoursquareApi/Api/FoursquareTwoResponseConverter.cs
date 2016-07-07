@@ -34,19 +34,16 @@ namespace Foursquare.Api
             }
 
             JToken response = jObject["response"];
-            if (response != null)
+            if (response?["responses"] != null)
             {
-                if (response["responses"] != null)
+                var responses = response["responses"].Children().ToList();
+                if (responses.Count > 0)
                 {
-                    var responses = response["responses"].Children().ToList();
-                    if (responses.Count > 0)
-                    {
-                        output.SubResponse1 = ParseResponse<T>(responses.ElementAt(0));
-                    }
-                    if (responses.Count > 1)
-                    {
-                        output.SubResponse2 = ParseResponse<V>(responses.ElementAt(1));
-                    }
+                    output.SubResponse1 = ParseResponse<T>(responses.ElementAt(0));
+                }
+                if (responses.Count > 1)
+                {
+                    output.SubResponse2 = ParseResponse<V>(responses.ElementAt(1));
                 }
             }
 

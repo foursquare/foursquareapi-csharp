@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Foursquare.Model;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Foursquare.Api;
 
 namespace Foursquare.Model

@@ -191,7 +191,7 @@ namespace Foursquare.Api
 
         private static string RefinementString(SearchRecommendationRefinement refinement, int index)
         {
-            string output = string.Format("{0}-{1}", refinement.id, index);
+            string output = $"{refinement.id}-{index}";
             if (!string.IsNullOrEmpty(refinement.source)) 
             {
                 output += ("-" + refinement.source);
