@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/foursquare/fsqio/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://developer.foursquare.com</projectUrl>
+    <iconUrl>https://playfoursquare.s3.amazonaws.com/press/app-icon/foursquare-64w.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>The initial release of the Foursquare API wrapper for .NET.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Foursquare FourSquare API Wrapper REST</tags>
+  </metadata>
+</package>

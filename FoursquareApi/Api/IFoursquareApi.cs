@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foursquare.Api
 {
-    interface IFoursquareApi
+    public interface IFoursquareApi
     {
         Task<FoursquareResponse<UserResponse>> UserDetails(string userId);
         Task<FoursquareResponse<PhotosResponse>> UserPhotos(string id = "self", int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0);
@@ -46,11 +46,24 @@ namespace Foursquare.Api
         Task<FoursquareResponse<AddVenue>> AddVenue(Venue v, string category, FoursquareLocation loc, bool isPrivate = false, string dupeDetectedOverrideKey = null);
         Task<FoursquareResponse<Empty>> DeletePhoto(string id);
         Task<FoursquareResponse<PhotoResponse>> AddPhoto(Stream file, string checkinId = null, string venueId = null, string tipId = null, bool twitter = false, bool facebook = false, bool makePublic = false, FoursquareLocation loc = null);
-        Task<FoursquareResponse<SearchRecommendation>> SearchRecommendations(SearchRecommendationFilters filters, RecommendationSort sort = RecommendationSort.BestMatch,
-            string near = null, string nearGeoId = null, int snippetCharLimit = Constants.BROWSE_EXPLORE_SNIPPET_LENGTH,
-            FoursquareLocation location = null, FoursquareLocation currentLocation = null, FoursquareLocation ne = null, FoursquareLocation sw = null,
-            bool ignoreSpellingCorrection = false, int? searchRadius = null, string mode = null, int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0,
-            List<string> excludeVenues = null, List<string> includeVenues = null, string referralId = null, SearchRecommendationLocations.SearchRecommendationGeoBounds bounds = null,
+        Task<FoursquareResponse<SearchRecommendation>> SearchRecommendations(SearchRecommendationFilters filters, 
+            RecommendationSort sort = RecommendationSort.BestMatch,
+            string near = null, 
+            string nearGeoId = null, 
+            int snippetCharLimit = Constants.BROWSE_EXPLORE_SNIPPET_LENGTH,
+            FoursquareLocation location = null, 
+            FoursquareLocation currentLocation = null, 
+            FoursquareLocation ne = null, 
+            FoursquareLocation sw = null,
+            bool ignoreSpellingCorrection = false, 
+            int? searchRadius = null, 
+            string mode = null, 
+            int limit = Constants.DEFAULT_PAGE_SIZE, 
+            int offset = 0,
+            List<string> excludeVenues = null,
+            List<string> includeVenues = null, 
+            string referralId = null, 
+            SearchRecommendationLocations.SearchRecommendationGeoBounds bounds = null,
             int initialOffset = 0);
     }
 }
