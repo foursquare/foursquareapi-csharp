@@ -8,24 +8,29 @@ namespace Foursquare.Api
 {
     internal abstract class BaseResponseConverter : JsonConverter
     {
-        protected FoursquareResponse<T> ParseResponse<T>(JToken jObject) where T : IFoursquareType
+        protected FoursquareResponse<T> ParseResponse<T>(JToken root) where T : IFoursquareType
         {
             FoursquareResponse<T> output = new FoursquareResponse<T>();
 
-            if (jObject["meta"] != null)
+            if (root["meta"] != null)
             {
-                output.meta = jObject["meta"].ToObject<Meta>();
+                output.meta = root["meta"].ToObject<Meta>();
             }
 
-            if (jObject["notifications"] != null)
+            if (root["notifications"] != null)
             {
-                output.notifications = jObject["notifications"].ToObject<List<Notifications>>();
+                output.notifications = root["notifications"].ToObject<List<Notifications>>();
             }
 
-            JToken response = jObject["response"];
+            JToken response = root["response"];
             if (response != null)
             {
                 output.response = response.ToObject<T>();
+            }
+
+            if (root["access_token"] != null)
+            {
+                output.response = root.ToObject<T>();
             }
 
             return output;

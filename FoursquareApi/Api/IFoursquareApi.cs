@@ -10,6 +10,10 @@ namespace Foursquare.Api
 {
     public interface IFoursquareApi
     {
+        string Token { get; set; }
+        string Locale { get; set; }
+
+        Task<FoursquareResponse<AccessToken>> ExchangeCodeForToken(string code, string redirectUri = null);
         Task<FoursquareResponse<UserResponse>> UserDetails(string userId);
         Task<FoursquareResponse<PhotosResponse>> UserPhotos(string id = "self", int limit = Constants.DEFAULT_PAGE_SIZE, int offset = 0);
         Task<FoursquareResponse<HistorySearch>> SearchHistory(string id, int offset = 0, int limit = Constants.DEFAULT_PAGE_SIZE, string geoId = null,

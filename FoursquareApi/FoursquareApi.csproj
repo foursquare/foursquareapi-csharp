@@ -53,6 +53,7 @@
     <Compile Include="Helper\DateTimeUtils.cs" />
     <Compile Include="Helper\RecommendationSort.cs" />
     <Compile Include="Model\AbstractHasIdType.cs" />
+    <Compile Include="Model\AccessToken.cs" />
     <Compile Include="Model\AddVenue.cs" />
     <Compile Include="Model\AppPost.cs" />
     <Compile Include="Model\AutoComplete.cs" />
@@ -141,7 +142,6 @@
     <Compile Include="Model\UserVisits.cs" />
     <Compile Include="Model\Venue.cs" />
     <Compile Include="Model\VenueAttribute.cs" />
-    <Compile Include="Model\VenueAttributeSection.cs" />
     <Compile Include="Model\VenueHours.cs" />
     <Compile Include="Model\VenueHoursTimeframe.cs" />
     <Compile Include="Model\VenueSearch.cs" />

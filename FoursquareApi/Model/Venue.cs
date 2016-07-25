@@ -38,7 +38,7 @@ namespace Foursquare.Model
         // Will contain key=url
         public Dictionary<string, string> reservations { get; set; }
         public Page page { get; set; }
-        public List<VenueAttributeSection> attributes { get; set; }
+        public FoursquareGroups<VenueAttribute> attributes { get; set; }
         public Delivery delivery { get; set; }
         public FoursquareGroups<Checkin> hereNow { get; set; }
         public Contact contact { get; set; }

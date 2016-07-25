@@ -21,6 +21,7 @@ namespace Foursquare.Api
     public sealed class FoursquareApi : IFoursquareApi
     {
         private const string ApiBase = "https://api.foursquare.com/v2/";
+        private const string OAuthBase = "https://foursquare.com/oauth2/";
 
         private readonly string _clientId;
         private readonly string _clientSecret;
@@ -29,6 +30,12 @@ namespace Foursquare.Api
         internal static string UserLanguage { get; private set; }
 
         public string Token { get; set; }
+
+        public string Locale
+        {
+            get { return UserLanguage; }
+            set { UserLanguage = value; }
+        }
 
         public FoursquareApi(string clientId, string clientSecret, string locale = "en", string version = "20160516") 
         {
@@ -44,6 +51,19 @@ namespace Foursquare.Api
             return !string.IsNullOrEmpty(Token);
         }
 
+        #region Auth
+
+        public Task<FoursquareResponse<AccessToken>> ExchangeCodeForToken(string code, string redirectUri = null)
+        {
+            var req = new FoursquareRequest(OAuthBase + "access_token");
+            AddCommonParams(ref req);
+            req.AddParam("grant_type", "authorization_code");
+            req.AddParam("code", code);
+            req.AddParam("redirect_uri", redirectUri);
+            return req.MakeRequest<AccessToken>();
+        }
+
+        #endregion
         #region Users
         public Task<FoursquareResponse<UserResponse>> UserDetails(string userId)
         {
@@ -457,7 +477,7 @@ namespace Foursquare.Api
             {
                 refRequest.AddParam("v", _version);
             }
-
+            refRequest.AddParam("m", "foursquare");
         }
 
         private static void AddLocationParams(ref FoursquareRequest refRequest, FoursquareLocation location)
