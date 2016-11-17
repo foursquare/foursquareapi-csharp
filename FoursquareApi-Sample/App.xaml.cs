@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Foursquare.Api;
+using MrJitters.Pages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,13 +17,16 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace FoursquareApi_Sample
+namespace MrJitters
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : Application
     {
+
+        public static FoursquareApi API = new FoursquareApi("CQ0WNZJ0DW00UQVVFKJVT3ZZTTLEOP3PQVUGXS1LORUB32KI", "R1EBBOSUB4AEEBWWZYTIJR45JX50CTIOFO12JLPCF04HMINZ");
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

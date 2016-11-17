@@ -1,8 +1,16 @@
 ﻿<Application
-    x:Class="FoursquareApi_Sample.App"
+    x:Class="MrJitters.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FoursquareApi_Sample"
+    xmlns:local="using:MrJitters"
     RequestedTheme="Light">
+    <Application.Resources>
+        <ResourceDictionary>
 
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
